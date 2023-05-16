@@ -1,0 +1,434 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./tailwind.config.js"></script>
+  <link rel="stylesheet" href="./styles.css">
+  </link>
+  <script src="./data.js"></script>
+  <script src="./main.js"></script>
+  <title>Araxys Shop | Order</title>
+</head>
+
+<body>
+  <header class="container flex justify-between items-center py-5 relative">
+    <h1 class="header-brand text-ghost font-bold text-2xl">Araxys Shop</h1>
+    <div class="nav">
+      <button class="z-20 bg-white-lilac flex items-center justify-center w-10 h-10 rounded-full relative md:hidden"
+        id="toggle-nav">
+        <div class="nav-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+      <nav id="nav-menu"
+        class="nav-menu max-md:absolute max-md:top-0 max-md:left-0 max-md:w-full max-md:h-full flex-col max-md:p-4 max-md:pt-20 max-md:space-y-4 md:opacity-100 md:flex-row flex md:items-center md:space-x-4 md:select-auto md:pointer-events-auto">
+        <p class="header-brand text-big-stone font-bold text-2xl md:hidden">Menu</p>
+        <a class="flex text-big-stone items-center gap-x-2 md:hover:text-mountain-meadow" href="/profile">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-settings">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+            </path>
+          </svg>
+          <span class="font-bold md:font-normal">
+            Joe Public
+          </span>
+        </a>
+        <a class="flex text-big-stone items-center gap-x-2 md:hover:text-red-500" href="/logout">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-power">
+            <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+            <line x1="12" y1="2" x2="12" y2="12"></line>
+          </svg>
+          <span class="font-bold md:font-normal">
+            Logout
+          </span>
+        </a>
+      </nav>
+      <div class="absolute top-[40px] right-[36px]">
+        <div class="nav-fill"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Pages -->
+  <section class="bg-white-lilac">
+    <div class="container flex max-md:flex-col-reverse max-md:gap-y-5 pt-5 md:pt-2 md:justify-between md:items-center">
+      <ul class="tabs tabs-full">
+        <li class="tabs-item active">
+          <a href="/customers" class="tabs-link">Customers</a>
+        </li>
+        <li class="tabs-item">
+          <a href="/products" class="tabs-link">Administrators</a>
+        </li>
+        <li class="tabs-item">
+          <a href="/orders" class="tabs-link">Support</a>
+        </li>
+        <li class="tabs-item">
+          <a href="/orders" class="tabs-link">Others</a>
+        </li>
+      </ul>
+      <!-- Alerts -->
+      <button class="flex items-center gap-x-2 max-md:self-end md:hover:text-mountain-meadow">
+        <div class="relative">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-inbox">
+            <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline>
+            <path
+              d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z">
+            </path>
+          </svg>
+          <span
+            class="absolute top-0 left-0 w-5 h-5 rounded-full bg-big-stone text-white text-xs flex items-center justify-center -translate-y-[50%] -translate-x-[45%]">3</span>
+        </div>
+        Alerts
+      </button>
+    </div>
+  </section>
+
+  <!-- Search and Tabs -->
+  <section class="md:border-b md:border-castkill-white md:border-b-2">
+    <div class="container flex max-md:flex-col-reverse max-md:gap-y-5 md:justify-between md:items-center">
+      <ul class="tabs tabs-outline md:self-end md:-mb-[2px]">
+        <li class="tabs-item">
+          <a href="/plans" class="tabs-link">Plans</a>
+        </li>
+        <li class="tabs-item">
+          <a href="/contracts" class="tabs-link">Contracts</a>
+        </li>
+        <li class="tabs-item active">
+          <a href="/orders" class="tabs-link">Orders</a>
+        </li>
+        <li class="tabs-item">
+          <a href="/sites" class="tabs-link">Sites</a>
+        </li>
+      </ul>
+      <!-- Search -->
+      <form class="max-md:pt-6 md:py-4">
+        <div class="flex items-center relative">
+          <svg class="absolute top-[50%] -translate-y-[50%] left-6" xmlns="http://www.w3.org/2000/svg" width="24"
+            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" class="feather feather-search">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" class="px-4 py-2 pl-14 h-14 rounded-full border border-ghost w-full"
+            placeholder="Contract or Customer" data-js="search-input" />
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Table Actions -->
+  <section>
+    <div class="container py-6 md:py-10">
+      <h2 class="text-2xl text-big-stone font-semibold">Create New Order</h2>
+    </div>
+    <div class="container mb-20">
+      <form class="border border-white-lilac border-2 lg:space-y-10">
+        <div class="max-w-5xl mx-auto lg:space-y-10 p-10">
+          <div class="lg:grid lg:grid-cols-2 lg:gap-x-20">
+            <div class="md:grid md:grid-cols-2 md:gap-x-8">
+              <div class="form-group">
+                <label class="form-label">Plan</label>
+                <div class="relative">
+                  <select class="form-control appearance-none pr-10" data-js="select2">
+                    <option value="1">Basic</option>
+                    <option value="2">Standard</option>
+                    <option value="3">Premium</option>
+                  </select>
+                  <svg class="absolute top-[50%] right-2 -translate-y-[50%] text-big-stone"
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-chevron-down">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Month</label>
+                <div class="relative">
+                  <select class="form-control appearance-none pr-10" data-js="select2">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                  </select>
+                  <svg class="absolute top-[50%] right-2 -translate-y-[50%] text-big-stone"
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-chevron-down">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+              </div>
+              <div class="form-group md:col-span-full">
+                <label class="form-label">Order No.</label>
+                <input type="text" class="form-control" placeholder="Order No." value="ORN-12X98-ASD" />
+              </div>
+            </div>
+            <ul class="grid grid-cols-2 gap-4 mb-10 md:gap-x-8 lg:grid-cols-3">
+              <li class="info-group">
+                <p class="text-bombay font-semibold text-sm">
+                  Contract
+                </p>
+                <p>PTVB-12387XOI</p>
+              </li>
+              <li class="info-group">
+                <p class="text-bombay font-semibold text-sm">
+                  Customer
+                </p>
+                <p>John Doe</p>
+              </li>
+              <li class="info-group">
+                <p class="text-bombay font-semibold text-sm">
+                  Site
+                </p>
+                <p>Sydney</p>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-big-stone border-b border-b-2 border-b-castkill-white pb-2 mb-6">
+              Add Product(s)
+            </h3>
+            <div class="max-lg:divide-y space-y-10 lg:space-y-4">
+              <div class="product-row md:grid md:grid-cols-2 md:gap-x-8 lg:grid-cols-4">
+                <div class="form-group">
+                  <label class="form-label">Product</label>
+                  <div class="relative">
+                    <select class="form-control appearance-none pr-10" data-js="select2">
+                      <option value="1">Vandal</option>
+                      <option value="2">Bulldog</option>
+                      <option value="3">Operator</option>
+                      <option value="3">Shorty</option>
+                    </select>
+                    <svg class="absolute top-[50%] right-2 -translate-y-[50%] text-big-stone"
+                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="feather feather-chevron-down">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Sort</label>
+                  <div class="relative">
+                    <select class="form-control appearance-none pr-10" data-js="select2">
+                      <option value="1">Color</option>
+                      <option value="2">Finisher</option>
+                      <option value="3">Animation</option>
+                    </select>
+                    <svg class="absolute top-[50%] right-2 -translate-y-[50%] text-big-stone"
+                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="feather feather-chevron-down">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Quantity</label>
+                  <div class="form-well">
+                    <input class="form-control appearance-none" placeholder="Quantity" type="number" value="999" />
+                    <span class="form-well__label">tonnes</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Length</label>
+                  <div class="form-fusion">
+                    <input class="form-control form-fusion__left appearance-none" placeholder="Quantity" type="number"
+                      value="999" />
+                    <div class="relative">
+                      <select class="form-control form-fusion__right appearance-none pr-10" data-js="select2">
+                        <option value="1">Meter</option>
+                        <option value="2">Kilometer</option>
+                        <option value="3">Miles</option>
+                      </select>
+                      <svg class="absolute top-[50%] right-2 -translate-y-[50%] text-big-stone"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-chevron-down">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="product-row md:grid md:grid-cols-2 md:gap-x-8 max-lg:pt-10 lg:grid-cols-4">
+                <div class="form-group">
+                  <label class="form-label">Product</label>
+                  <div class="relative">
+                    <select class="form-control appearance-none pr-10" data-js="select2">
+                      <option value="1">Vandal</option>
+                      <option value="2">Bulldog</option>
+                      <option value="3">Operator</option>
+                      <option value="3">Shorty</option>
+                    </select>
+                    <svg class="absolute top-[50%] right-2 -translate-y-[50%] text-big-stone"
+                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="feather feather-chevron-down">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+
+                    <button class="btn-icon hidden lg:block absolute top-[50%] -translate-y-[50%] -left-8">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-x">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Sort</label>
+                  <div class="relative">
+                    <select class="form-control appearance-none pr-10" data-js="select2">
+                      <option value="1">Color</option>
+                      <option value="2">Finisher</option>
+                      <option value="3">Animation</option>
+                    </select>
+                    <svg class="absolute top-[50%] right-2 -translate-y-[50%] text-big-stone"
+                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="feather feather-chevron-down">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Quantity</label>
+                  <div class="form-well">
+                    <input class="form-control appearance-none" placeholder="Quantity" type="number" value="999" />
+                    <span class="form-well__label">tonnes</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Length</label>
+                  <div class="form-fusion">
+                    <input class="form-control form-fusion__left appearance-none" placeholder="Quantity" type="number"
+                      value="999" />
+                    <div class="relative">
+                      <select class="form-control form-fusion__right appearance-none pr-10" data-js="select2">
+                        <option value="1">Meter</option>
+                        <option value="2">Kilometer</option>
+                        <option value="3">Miles</option>
+                      </select>
+                      <svg class="absolute top-[50%] right-2 -translate-y-[50%] text-big-stone"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-chevron-down">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn btn-danger lg:hidden">
+                  Delete
+                </button>
+              </div>
+              <div class="product-row md:grid md:grid-cols-2 md:gap-x-8 max-lg:pt-10 lg:grid-cols-4">
+                <div class="form-group">
+                  <label class="form-label">Product</label>
+                  <div class="relative">
+                    <select class="form-control appearance-none pr-10" data-js="select2">
+                      <option value="1">Vandal</option>
+                      <option value="2">Bulldog</option>
+                      <option value="3">Operator</option>
+                      <option value="3">Shorty</option>
+                    </select>
+                    <svg class="absolute top-[50%] right-2 -translate-y-[50%] text-big-stone"
+                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="feather feather-chevron-down">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+
+                    <button class="btn-icon hidden lg:block absolute top-[50%] -translate-y-[50%] -left-8">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-x">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Sort</label>
+                  <div class="relative">
+                    <select class="form-control appearance-none pr-10" data-js="select2">
+                      <option value="1">Color</option>
+                      <option value="2">Finisher</option>
+                      <option value="3">Animation</option>
+                    </select>
+                    <svg class="absolute top-[50%] right-2 -translate-y-[50%] text-big-stone"
+                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="feather feather-chevron-down">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Quantity</label>
+                  <div class="form-well">
+                    <input class="form-control appearance-none" placeholder="Quantity" type="number" value="999" />
+                    <span class="form-well__label">tonnes</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Length</label>
+                  <div class="form-fusion">
+                    <input class="form-control form-fusion__left appearance-none" placeholder="Quantity" type="number"
+                      value="999" />
+                    <div class="relative">
+                      <select class="form-control form-fusion__right appearance-none pr-10" data-js="select2">
+                        <option value="1">Meter</option>
+                        <option value="2">Kilometer</option>
+                        <option value="3">Miles</option>
+                      </select>
+                      <svg class="absolute top-[50%] right-2 -translate-y-[50%] text-big-stone"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-chevron-down">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn btn-danger lg:hidden">
+                  Delete
+                </button>
+              </div>
+              <button class="btn btn-primary w-full lg:hidden">
+                Add Row
+              </button>
+              <button class="btn btn-sm btn-outline hidden lg:block">
+                Add Row
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white-lilac h-24 flex items-center justify-end px-4">
+          <button class="btn btn-gradient">
+            Save Order
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</body>
+
+</html>
